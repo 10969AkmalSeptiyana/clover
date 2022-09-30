@@ -104,7 +104,12 @@ export default function Header() {
                 fill="#082032"
               />
             </svg>
-            <NavToggle onClick={() => setToggleMainMenu((prev) => !prev)}>
+            <NavToggle
+              onClick={() => setToggleMainMenu((prev) => !prev)}
+              position={toggleMainMenu ? "fixed" : "relative"}
+              top={toggleMainMenu && "10px"}
+              right={toggleMainMenu && "10px"}
+            >
               <svg
                 width="23"
                 height="21"

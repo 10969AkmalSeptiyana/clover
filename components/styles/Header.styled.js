@@ -11,7 +11,6 @@ export const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   row-gap: 50px;
-  list-style: none;
   position: fixed;
   background-color: #fff;
   top: 0;
@@ -54,6 +53,9 @@ export const NavIcons = styled.div`
 `;
 
 export const NavToggle = styled.div`
+  position: ${({ position }) => position};
+  top: ${({ top }) => top};
+  right: ${({ right }) => right};
   z-index: 50;
 
   @media screen and (min-width: 992px) {

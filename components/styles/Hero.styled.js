@@ -9,6 +9,10 @@ export const CardWrapper = styled.div`
 export const HeroCard = styled.div`
   position: relative;
 
+  @media screen and (min-width: 992px) {
+    flex: 1;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -32,10 +36,6 @@ export const HeroCard = styled.div`
     color: #fff;
     border-top: 1px solid #fff;
     border-bottom: 1px solid #fff;
-  }
-
-  @media screen and (min-width: 992px) {
-    flex: 1;
   }
 
   img {

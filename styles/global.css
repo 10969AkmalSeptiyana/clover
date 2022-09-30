@@ -41,3 +41,24 @@ select {
 body {
   font-family: "Inter", sans-serif;
 }
+
+section {
+  margin-bottom: 100px;
+}
+
+ul {
+  list-style: none;
+}
+
+input {
+  border: 0;
+  outline: none;
+}
+
+button {
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+}
