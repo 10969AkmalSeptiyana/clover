@@ -1,5 +1,6 @@
 import { Container } from "../styles/Container.styled";
 import { Card, NewsInput, Subscribe } from "../styles/NewsLetter.styled";
+import Button from "../ui/Button";
 
 export default function NewsLetter() {
   return (
@@ -12,7 +13,9 @@ export default function NewsLetter() {
           <form>
             <label>
               <NewsInput type="text" placeholder="Enter your email here" />
-              <Subscribe type="submit">Subscribe</Subscribe>
+              <Subscribe>
+                <Button padding="10px 20px">Subscribe</Button>
+              </Subscribe>
             </label>
           </form>
         </Card>

@@ -18,8 +18,6 @@ export const Wrapper = styled.div`
 
   h2 {
     font-size: 42px;
-    color: #082032;
-    font-weight: 500;
   }
 
   span {
@@ -30,17 +28,13 @@ export const Wrapper = styled.div`
 
   h3 {
     font-size: 18px;
-    font-weight: 500;
-    color: #082032;
     margin: 30px 0 15px;
   }
 
   p {
     max-width: 469px;
-    color: #082032;
     font-size: 18px;
     line-height: 24px;
-    font-weight: 400;
   }
 
   p:not(:last-child) {
@@ -55,8 +49,6 @@ export const Wrapper = styled.div`
     h3 {
       text-transform: uppercase;
       font-size: 18px;
-      font-weight: 400;
-      color: #082032;
     }
 
     ul {
@@ -95,19 +87,4 @@ export const Slider = styled.div`
       border-radius: 15px;
     }
   }
-`;
-
-export const Button = styled.button`
-  padding: 16px 40px;
-  background-color: #398ab9;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  margin-top: 40px;
-  align-self: center;
 `;

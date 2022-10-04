@@ -24,5 +24,4 @@ export const ProductTitle = styled.h3`
 export const ProductPrice = styled.h4`
   font-size: 18px;
   font-weight: 400;
-  color: #082032;
 `;

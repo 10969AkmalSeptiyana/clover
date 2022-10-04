@@ -18,8 +18,6 @@ export const Wrapper = styled.div`
   div {
     h3 {
       font-size: 20px;
-      font-weight: 500;
-      color: #082032;
       margin-bottom: 35px;
     }
 

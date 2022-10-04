@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 export const Title = styled.h2`
   font-size: 36px;
-  font-weight: medium;
-  color: #082032;
   text-align: center;
 
   @media screen and (min-width: 768px) {
@@ -37,14 +35,10 @@ export const CardBody = styled.div`
 
   h3 {
     font-size: 24px;
-    font-weight: 500;
-    color: #082032;
   }
 
   p {
-    font-size: 16px;
     color: #707070;
-    font-weight: 400;
     line-height: 24px;
     margin: 10px 0 20px;
     max-width: 413px;

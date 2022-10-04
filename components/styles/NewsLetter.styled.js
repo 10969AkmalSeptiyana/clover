@@ -33,7 +33,6 @@ export const Card = styled.div`
   h2 {
     font-size: 48px;
     color: #fff;
-    font-weight: 500;
     margin-bottom: 5px;
     z-index: 10;
   }
@@ -41,7 +40,6 @@ export const Card = styled.div`
   p {
     font-size: 18px;
     color: #fff;
-    font-weight: 400;
     z-index: 10;
   }
 
@@ -69,15 +67,8 @@ export const NewsInput = styled.input`
   }
 `;
 
-export const Subscribe = styled.button`
-  font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
-  color: #fff;
-  background-color: #398ab9;
-  border-radius: 4px;
+export const Subscribe = styled.div`
   position: absolute;
   right: 10px;
   top: -10px;
-  cursor: pointer;
 `;

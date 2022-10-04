@@ -6,7 +6,6 @@ export const StyledFooter = styled.footer`
   text-align: center;
 
   p {
-    font-size: 16px;
     font-weight: 500;
     color: #fff;
   }

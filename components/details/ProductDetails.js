@@ -6,8 +6,8 @@ import {
   Wrapper,
   Preview,
   Slider,
-  Button,
 } from "../styles/ProductDetails.styled";
+import Button from "../ui/Button";
 
 export default function ProductDetails() {
   return (
@@ -81,7 +81,17 @@ export default function ProductDetails() {
                 <li>L</li>
                 <li>XL</li>
               </ul>
-              <Button>
+              <Button
+                href="/cart"
+                type="link"
+                padding="16px 40px"
+                radius="50px"
+                display="flex"
+                items="center"
+                colGap="10px"
+                alignSelf="center"
+                margin="40px 0 0 0"
+              >
                 <svg
                   width="21"
                   height="22"
