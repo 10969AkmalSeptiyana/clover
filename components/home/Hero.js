@@ -3,20 +3,24 @@ import Image from "next/image";
 import { Container } from "../styles/Container.styled";
 import { CardWrapper, HeroCard } from "../styles/Hero.styled";
 
-export default function Hero() {
+export default function Hero({ categories }) {
   return (
     <section>
       <Container>
         <CardWrapper>
-          <HeroCard title="Women">
-            <img src="/images/hero-image-1.png" alt="Hero Image 1" />
-          </HeroCard>
-          <HeroCard title="Kids">
-            <img src="/images/hero-image-2.png" alt="Hero Image 2" />
-          </HeroCard>
-          <HeroCard title="Men">
-            <img src="/images/hero-image-3.png" alt="Hero Image 3" />
-          </HeroCard>
+          {categories.map((category) => {
+            return (
+              <HeroCard key={category.id} title={category.title}>
+                <Image
+                  src={category.imageUrl}
+                  alt={`Hero Image ${category.title}`}
+                  quality={100}
+                  width={426}
+                  height={647}
+                />
+              </HeroCard>
+            );
+          })}
         </CardWrapper>
       </Container>
     </section>

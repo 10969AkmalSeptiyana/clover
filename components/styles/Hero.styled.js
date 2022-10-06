@@ -13,6 +13,10 @@ export const HeroCard = styled.div`
     flex: 1;
   }
 
+  span {
+    display: initial !important;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -25,6 +29,7 @@ export const HeroCard = styled.div`
       rgba(0, 0, 0, 0) 50%,
       rgba(0, 0, 0, 0.5) 100%
     );
+    z-index: 5;
   }
 
   &::after {
@@ -36,6 +41,7 @@ export const HeroCard = styled.div`
     color: #fff;
     border-top: 1px solid #fff;
     border-bottom: 1px solid #fff;
+    z-index: 10;
   }
 
   img {

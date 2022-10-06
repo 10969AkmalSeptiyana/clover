@@ -6,6 +6,7 @@ import {
   ProductTitle,
   ProductPrice,
 } from "./Card.styled";
+import "../../../lib/hooks/format/currency";
 
 export default function Card({ title, price, img, alt }) {
   return (
@@ -14,7 +15,7 @@ export default function Card({ title, price, img, alt }) {
       <CardBody>
         <div>
           <ProductTitle>{title}</ProductTitle>
-          <ProductPrice>${price}</ProductPrice>
+          <ProductPrice>{price.currency()}</ProductPrice>
         </div>
         <svg
           width="24"

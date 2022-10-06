@@ -5,7 +5,7 @@ import ShoppingCart from "../components/cart/ShoppingCart";
 import { Container } from "../components/styles/Container.styled";
 import ShippingDetails from "../components/cart/ShippingDetails";
 
-export default function Cart() {
+export default function Cart({ meta }) {
   return (
     <Layout>
       <Breadcrumb
@@ -18,10 +18,21 @@ export default function Cart() {
         <Container>
           <Wrapper>
             <ShoppingCart />
-            <ShippingDetails />
+            <ShippingDetails meta={meta} />
           </Wrapper>
         </Container>
       </section>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch(`${process.env.API_HOST}/api/checkout/meta`);
+  const meta = await res.json();
+
+  return {
+    props: {
+      meta,
+    },
+  };
 }
