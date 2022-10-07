@@ -8,8 +8,9 @@ import {
   Slider,
 } from "../styles/ProductDetails.styled";
 import Button from "../ui/Button";
+import "../../lib/hooks/format/currency";
 
-export default function ProductDetails() {
+export default function ProductDetails({ details }) {
   return (
     <StyledProductDetails>
       <Container>
@@ -60,8 +61,8 @@ export default function ProductDetails() {
           </div>
 
           <div>
-            <h2>Shirts Isolated</h2>
-            <span>$50.00</span>
+            <h2>{details.title}</h2>
+            <span>{details.price.currency()}</span>
 
             <h3>About the product:</h3>
             <p>

@@ -23,3 +23,12 @@ export const CardGrid = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
+export const StrechedLink = styled.a`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+`;

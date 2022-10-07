@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const CardProduct = styled.div``;
+export const CardProduct = styled.div`
+  position: relative;
+`;
 
 export const CardBody = styled.div`
   max-width: 413px;

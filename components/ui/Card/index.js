@@ -8,7 +8,7 @@ import {
 } from "./Card.styled";
 import "../../../lib/hooks/format/currency";
 
-export default function Card({ title, price, img, alt }) {
+export default function Card({ title, price, img, alt, children }) {
   return (
     <CardProduct>
       <Image src={img} alt={alt} width={402} height={519} quality={100} />
@@ -37,6 +37,7 @@ export default function Card({ title, price, img, alt }) {
           </defs>
         </svg>
       </CardBody>
+      {children}
     </CardProduct>
   );
 }
