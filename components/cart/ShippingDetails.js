@@ -60,15 +60,18 @@ export default function ShippingDetails({ meta }) {
               {meta?.couriers.map((item) => {
                 return (
                   <div key={item.id}>
-                    <button type="button">
-                      <Image
-                        src={item.imageUrl}
-                        alt={item.title}
-                        width={item.width}
-                        height={item.height}
-                        objectFit="contain"
-                      />
-                    </button>
+                    <label>
+                      <input type="radio" name="courier" />
+                      <div>
+                        <Image
+                          src={item.imageUrl}
+                          alt={item.title}
+                          width={item.width}
+                          height={item.height}
+                          objectFit="contain"
+                        />
+                      </div>
+                    </label>
                   </div>
                 );
               })}
@@ -81,15 +84,18 @@ export default function ShippingDetails({ meta }) {
               {meta?.payments.map((item) => {
                 return (
                   <div key={item.id}>
-                    <button type="button">
-                      <Image
-                        src={item.imageUrl}
-                        alt={item.title}
-                        width={item.width}
-                        height={item.height}
-                        objectFit="contain"
-                      />
-                    </button>
+                    <label>
+                      <input type="radio" name="payment" />
+                      <div>
+                        <Image
+                          src={item.imageUrl}
+                          alt={item.title}
+                          width={item.width}
+                          height={item.height}
+                          objectFit="contain"
+                        />
+                      </div>
+                    </label>
                   </div>
                 );
               })}

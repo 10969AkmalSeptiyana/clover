@@ -50,22 +50,6 @@ export const Wrapper = styled.div`
       text-transform: uppercase;
       font-size: 18px;
     }
-
-    ul {
-      border-top: 1px solid #082032;
-      border-bottom: 1px solid #082032;
-
-      li {
-        font-size: 18px;
-        font-weight: 400;
-        color: #082032;
-        padding: 10px;
-
-        &:hover {
-          background-color: #398ab9;
-        }
-      }
-    }
   }
 `;
 
@@ -86,5 +70,39 @@ export const Slider = styled.div`
     img {
       border-radius: 15px;
     }
+  }
+`;
+
+export const SizeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #082032;
+  border-bottom: 1px solid #082032;
+
+  input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+
+    &:checked + div {
+      background-color: #398ab9;
+    }
+  }
+`;
+
+export const Size = styled.div`
+  font-size: 18px;
+  font-weight: 400;
+  color: #082032;
+  padding: 10px;
+
+  &:hover {
+    background-color: #398ab9;
   }
 `;

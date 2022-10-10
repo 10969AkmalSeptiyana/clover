@@ -1,14 +1,17 @@
+import parse from "html-react-parser";
 import Image from "next/image";
 
+import "../../lib/hooks/format/currency";
 import { Container } from "../styles/Container.styled";
 import {
+  Preview,
+  Size,
+  SizeWrapper,
+  Slider,
   StyledProductDetails,
   Wrapper,
-  Preview,
-  Slider,
 } from "../styles/ProductDetails.styled";
 import Button from "../ui/Button";
-import "../../lib/hooks/format/currency";
 
 export default function ProductDetails({ details }) {
   return (
@@ -18,7 +21,7 @@ export default function ProductDetails({ details }) {
           <div>
             <Preview>
               <Image
-                src="/images/details-image.png"
+                src={details?.imageUrls[0]}
                 alt="Details Image"
                 width={560}
                 height={609}
@@ -28,34 +31,23 @@ export default function ProductDetails({ details }) {
 
             <Slider>
               <div>
-                <Image
-                  src="/images/image-preview-1.png"
-                  alt="Image Slider"
-                  width={125}
-                  height={125}
-                  quality={100}
-                />
-                <Image
-                  src="/images/image-preview-2.png"
-                  alt="Image Slider"
-                  width={125}
-                  height={125}
-                  quality={100}
-                />
-                <Image
-                  src="/images/image-preview-3.png"
-                  alt="Image Slider"
-                  width={125}
-                  height={125}
-                  quality={100}
-                />
-                <Image
-                  src="/images/image-preview-4.png"
-                  alt="Image Slider"
-                  width={125}
-                  height={125}
-                  quality={100}
-                />
+                {details?.imageUrls
+                  .filter(
+                    (_, index) =>
+                      index !== 0 && index !== details?.imageUrls.length - 1
+                  )
+                  .map((img, index) => {
+                    return (
+                      <Image
+                        key={index}
+                        src={img}
+                        alt="Image Slider"
+                        width={125}
+                        height={125}
+                        quality={100}
+                      />
+                    );
+                  })}
               </div>
             </Slider>
           </div>
@@ -65,23 +57,28 @@ export default function ProductDetails({ details }) {
             <span>{details.price.currency()}</span>
 
             <h3>About the product:</h3>
-            <p>
-              Super slim fit shirt made of high-stretch fabric. Italian collar
-              and long sleeves with buttoned cuffs. Front button closure.
-            </p>
-            <p>
-              Regular fit shirt with lapel collar and long sleeves with buttoned
-              cuffs. Front button closure.
-            </p>
+            {parse(details?.description)}
 
             <form>
               <h3>Find your size</h3>
-              <ul>
-                <li>S</li>
-                <li>M</li>
-                <li>L</li>
-                <li>XL</li>
-              </ul>
+              <SizeWrapper>
+                <label>
+                  <input type="radio" name="size" />
+                  <Size>S</Size>
+                </label>
+                <label>
+                  <input type="radio" name="size" />
+                  <Size>M</Size>
+                </label>
+                <label>
+                  <input type="radio" name="size" />
+                  <Size>L</Size>
+                </label>
+                <label>
+                  <input type="radio" name="size" />
+                  <Size>XL</Size>
+                </label>
+              </SizeWrapper>
               <Button
                 href="/cart"
                 type="link"

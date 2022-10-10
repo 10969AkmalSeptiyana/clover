@@ -73,7 +73,24 @@ export const Wrapper = styled.div`
     height: 80px;
     margin-bottom: 16px;
 
-    button {
+    input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+
+      &:checked + div {
+        border: 1px solid #398ab9;
+        outline: none;
+      }
+    }
+
+    div {
       border: 1px solid #ddd;
       display: flex;
       align-items: center;
@@ -82,11 +99,6 @@ export const Wrapper = styled.div`
       background-color: #fff;
       width: 100%;
       height: 100%;
-
-      &:focus {
-        border: 1px solid #398ab9;
-        outline: none;
-      }
 
       img {
         max-height: 100%;
