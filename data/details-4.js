@@ -1,6 +1,7 @@
 export const details4 = {
   id: 4,
   price: 25,
+  quantity: 1,
   title: "Men's Solid Regular",
   description:
     "<p>Super slim fit shirt made of high-stretch fabric. Italian collar and long sleeves with buttoned cuffs. Front button closure.</p>\n<p>Regular fit shirt with lapel collar and long sleeves with buttoned cuffs. Front button closure.</p>",

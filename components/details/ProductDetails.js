@@ -1,7 +1,8 @@
 import parse from "html-react-parser";
 import Image from "next/image";
 
-import "../../lib/hooks/format/currency";
+import { useGlobalContext } from "../../lib/hooks/useGlobalContext";
+import "../../lib/format/currency";
 import { Container } from "../styles/Container.styled";
 import {
   Preview,
@@ -14,6 +15,8 @@ import {
 import Button from "../ui/Button";
 
 export default function ProductDetails({ details }) {
+  const { dispatch } = useGlobalContext();
+
   return (
     <StyledProductDetails>
       <Container>
@@ -80,8 +83,6 @@ export default function ProductDetails({ details }) {
                 </label>
               </SizeWrapper>
               <Button
-                href="/cart"
-                type="link"
                 padding="16px 40px"
                 radius="50px"
                 display="flex"
@@ -89,6 +90,8 @@ export default function ProductDetails({ details }) {
                 colGap="10px"
                 alignSelf="center"
                 margin="40px 0 0 0"
+                type="button"
+                onClick={() => dispatch({ type: "ADD_TO_CART", item: details })}
               >
                 <svg
                   width="21"

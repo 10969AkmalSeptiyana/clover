@@ -1,6 +1,7 @@
 export const details5 = {
   id: 5,
   price: 50,
+  quantity: 1,
   title: "Shirts Isolated",
   description:
     "<p>Super slim fit shirt made of high-stretch fabric. Italian collar and long sleeves with buttoned cuffs. Front button closure.</p>\n<p>Regular fit shirt with lapel collar and long sleeves with buttoned cuffs. Front button closure.</p>",

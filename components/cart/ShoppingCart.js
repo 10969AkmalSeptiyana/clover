@@ -1,19 +1,24 @@
 import Image from "next/image";
 
+import "../../lib/format/currency";
+import { useGlobalContext } from "../../lib/hooks/useGlobalContext";
 import {
-  StyledShoppingCart,
-  Heading,
   CartTable,
-  TableHeading,
-  ProductWrapper,
+  Counter,
+  Delete,
+  Heading,
   ImageItem,
   Item,
-  ProductItem,
   Price,
-  Delete,
+  ProductItem,
+  ProductWrapper,
+  StyledShoppingCart,
+  TableHeading,
 } from "../styles/ShoppingCart.styled";
 
 export default function ShoppingCart() {
+  const { state, dispatch } = useGlobalContext();
+
   return (
     <StyledShoppingCart>
       <Heading>
@@ -40,123 +45,70 @@ export default function ShoppingCart() {
         </div>
       </CartTable>
 
-      <ProductWrapper>
-        <ImageItem>
-          <Image
-            src="/images/details-image.png"
-            width={90}
-            height={90}
-            alt="product image"
-            objectFit="cover"
-          />
+      {Object.keys(state.cart).map((key) => {
+        const item = state.cart[key];
+        return (
+          <ProductWrapper key={key}>
+            <ImageItem>
+              <Image
+                src={item.imageUrls[item.imageUrls.length - 1]}
+                width={90}
+                height={90}
+                alt={item.title}
+                objectFit="cover"
+              />
 
-          <div>
-            <button> - </button>
-            <span>1</span>
-            <button> + </button>
-          </div>
-        </ImageItem>
-        <ProductItem>
-          <div>
-            <h3>Shirt Isolated</h3>
-            <span>Shirt</span>
-            <h4>$50.00</h4>
-          </div>
-        </ProductItem>
-        <Price>
-          <h4>$50.00</h4>
-        </Price>
-        <Item>
-          <div>
-            <button> - </button>
-            <span>1</span>
-            <button> + </button>
-          </div>
-        </Item>
-        <Delete>
-          <div>
-            <button>X</button>
-          </div>
-        </Delete>
-      </ProductWrapper>
-      <ProductWrapper>
-        <ImageItem>
-          <Image
-            src="/images/image-product-1.png"
-            width={90}
-            height={90}
-            alt="product image"
-            objectFit="cover"
-          />
-
-          <div>
-            <button> - </button>
-            <span>1</span>
-            <button> + </button>
-          </div>
-        </ImageItem>
-        <ProductItem>
-          <div>
-            <h3>High Quality T-Shirt</h3>
-            <span>T-Shirt</span>
-            <h4>$35.00</h4>
-          </div>
-        </ProductItem>
-        <Price>
-          <h4>$35.00</h4>
-        </Price>
-        <Item>
-          <div>
-            <button> - </button>
-            <span>1</span>
-            <button> + </button>
-          </div>
-        </Item>
-        <Delete>
-          <div>
-            <button>X</button>
-          </div>
-        </Delete>
-      </ProductWrapper>
-      <ProductWrapper>
-        <ImageItem>
-          <Image
-            src="/images/image-product-3.png"
-            width={90}
-            height={90}
-            alt="product image"
-            objectFit="cover"
-          />
-
-          <div>
-            <button> - </button>
-            <span>1</span>
-            <button> + </button>
-          </div>
-        </ImageItem>
-        <ProductItem>
-          <div>
-            <h3>Men’s Cotton T-Shirt</h3>
-            <span>T-Shirt</span>
-            <h4>$40.00</h4>
-          </div>
-        </ProductItem>
-        <Price>
-          <h4>$40.00</h4>
-        </Price>
-        <Item>
-          <div>
-            <button> - </button>
-            <span>1</span>
-            <button> + </button>
-          </div>
-        </Item>
-        <Delete>
-          <div>
-            <button>X</button>
-          </div>
-        </Delete>
-      </ProductWrapper>
+              <div>
+                <Counter
+                  onClick={() => dispatch({ type: "DECREMENT", id: item.id })}
+                >
+                  -
+                </Counter>
+                <span>{item.quantity}</span>
+                <Counter
+                  onClick={() => dispatch({ type: "INCREMENT", id: item.id })}
+                >
+                  +
+                </Counter>
+              </div>
+            </ImageItem>
+            <ProductItem>
+              <div>
+                <h3>{item.title}</h3>
+                <span>{item.category.title}</span>
+                <h4>{(item.price * item.quantity).currency()}</h4>
+              </div>
+            </ProductItem>
+            <Price>
+              <h4>{(item.price * item.quantity).currency()}</h4>
+            </Price>
+            <Item>
+              <div>
+                <Counter
+                  onClick={() => dispatch({ type: "DECREMENT", id: item.id })}
+                >
+                  -
+                </Counter>
+                <span>{item.quantity}</span>
+                <Counter
+                  onClick={() => dispatch({ type: "INCREMENT", id: item.id })}
+                >
+                  +
+                </Counter>
+              </div>
+            </Item>
+            <Delete
+              onClick={() =>
+                dispatch({ type: "REMOVE_FROM_CART", id: item.id })
+              }
+            >
+              <div>
+                <button>X</button>
+              </div>
+            </Delete>
+          </ProductWrapper>
+        );
+      })}
     </StyledShoppingCart>
   );
 }

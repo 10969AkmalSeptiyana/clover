@@ -44,8 +44,8 @@ export const NavLink = styled.a`
 
 export const NavIcons = styled.div`
   display: flex;
-  align-items: baseline;
-  column-gap: 28px;
+  align-items: center;
+  column-gap: 16px;
 
   svg {
     cursor: pointer;
@@ -60,5 +60,27 @@ export const NavToggle = styled.div`
 
   @media screen and (min-width: 992px) {
     display: none;
+  }
+`;
+
+export const Cart = styled.a`
+  svg g circle {
+    display: ${({ display }) => display};
+  }
+
+  &.animate-bounce {
+    animation: bounce 1s linear;
+
+    @keyframes bounce {
+      0%,
+      100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+      }
+      50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      }
+    }
   }
 `;

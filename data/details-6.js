@@ -1,6 +1,7 @@
 export const details6 = {
   id: 6,
   price: 45,
+  quantity: 1,
   title: "High Quality T-Shirt Zara",
   description:
     "<p>Super slim fit shirt made of high-stretch fabric. Italian collar and long sleeves with buttoned cuffs. Front button closure.</p>\n<p>Regular fit shirt with lapel collar and long sleeves with buttoned cuffs. Front button closure.</p>",

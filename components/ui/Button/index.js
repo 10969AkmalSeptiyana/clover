@@ -12,7 +12,12 @@ export default function Button(props) {
   }
 
   return (
-    <StyledButton {...props} type={props.isSubmit && "submit"}>
+    <StyledButton
+      type={props.type}
+      disabled={props.disabled}
+      onClick={props.onClick}
+      {...props}
+    >
       {props.children}
     </StyledButton>
   );

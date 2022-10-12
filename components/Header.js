@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
+import { useGlobalContext } from "../lib/hooks/useGlobalContext";
 import { Container } from "./styles/Container.styled";
 import {
   Nav,
@@ -8,11 +9,26 @@ import {
   NavList,
   NavIcons,
   NavToggle,
+  Cart,
 } from "./styles/Header.styled";
 import Logo from "./ui/Logo";
 
 export default function Header() {
   const [toggleMainMenu, setToggleMainMenu] = useState(false);
+  const [isCartChanged, setCartChanged] = useState(false);
+  const { state } = useGlobalContext();
+
+  const prevCart = useRef(state?.cart || {});
+
+  useEffect(() => {
+    if (prevCart.current !== state.cart) {
+      prevCart.current = state?.cart || {};
+      setCartChanged(true);
+      setTimeout(() => {
+        setCartChanged(false);
+      }, 550);
+    }
+  }, [state.cart]);
 
   return (
     <header>
@@ -57,33 +73,9 @@ export default function Header() {
 
           <NavIcons>
             <svg
-              width="21"
-              height="21"
-              viewBox="0 0 21 21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16.031 15.117L20.314 19.399L18.899 20.814L14.617 16.531C13.0237 17.8082 11.042 18.5029 9 18.5C4.032 18.5 0 14.468 0 9.5C0 4.532 4.032 0.5 9 0.5C13.968 0.5 18 4.532 18 9.5C18.0029 11.542 17.3082 13.5237 16.031 15.117ZM14.025 14.375C15.2941 13.0699 16.0029 11.3204 16 9.5C16 5.632 12.867 2.5 9 2.5C5.132 2.5 2 5.632 2 9.5C2 13.367 5.132 16.5 9 16.5C10.8204 16.5029 12.5699 15.7941 13.875 14.525L14.025 14.375Z"
-                fill="#082032"
-              />
-            </svg>
-            <svg
-              width="16"
-              height="22"
-              viewBox="0 0 16 22"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 21.5C0 19.3783 0.842855 17.3434 2.34315 15.8431C3.84344 14.3429 5.87827 13.5 8 13.5C10.1217 13.5 12.1566 14.3429 13.6569 15.8431C15.1571 17.3434 16 19.3783 16 21.5H14C14 19.9087 13.3679 18.3826 12.2426 17.2574C11.1174 16.1321 9.5913 15.5 8 15.5C6.4087 15.5 4.88258 16.1321 3.75736 17.2574C2.63214 18.3826 2 19.9087 2 21.5H0ZM8 12.5C4.685 12.5 2 9.815 2 6.5C2 3.185 4.685 0.5 8 0.5C11.315 0.5 14 3.185 14 6.5C14 9.815 11.315 12.5 8 12.5ZM8 10.5C10.21 10.5 12 8.71 12 6.5C12 4.29 10.21 2.5 8 2.5C5.79 2.5 4 4.29 4 6.5C4 8.71 5.79 10.5 8 10.5Z"
-                fill="#082032"
-              />
-            </svg>
-            <svg
-              width="20"
-              height="19"
-              viewBox="0 0 20 19"
+              width="30"
+              height="24"
+              viewBox="0 0 30 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -93,11 +85,18 @@ export default function Header() {
               />
             </svg>
             <Link href="/cart" passHref>
-              <a>
+              <Cart
+                display={
+                  state.cart && Object.keys(state.cart).length > 0
+                    ? "block"
+                    : "none"
+                }
+                className={isCartChanged && "animate-bounce"}
+              >
                 <svg
-                  width="21"
-                  height="22"
-                  viewBox="0 0 21 22"
+                  width="30"
+                  height="24"
+                  viewBox="0 0 30 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -105,8 +104,17 @@ export default function Header() {
                     d="M2 14.5V2.5H0V0.5H3C3.26522 0.5 3.51957 0.605357 3.70711 0.792893C3.89464 0.98043 4 1.23478 4 1.5V13.5H16.438L18.438 5.5H6V3.5H19.72C19.872 3.5 20.022 3.53466 20.1586 3.60134C20.2952 3.66801 20.4148 3.76495 20.5083 3.88479C20.6019 4.00462 20.6668 4.1442 20.6983 4.29291C20.7298 4.44162 20.7269 4.59555 20.69 4.743L18.19 14.743C18.1358 14.9592 18.011 15.1512 17.8352 15.2883C17.6595 15.4255 17.4429 15.5 17.22 15.5H3C2.73478 15.5 2.48043 15.3946 2.29289 15.2071C2.10536 15.0196 2 14.7652 2 14.5ZM4 21.5C3.46957 21.5 2.96086 21.2893 2.58579 20.9142C2.21071 20.5391 2 20.0304 2 19.5C2 18.9696 2.21071 18.4609 2.58579 18.0858C2.96086 17.7107 3.46957 17.5 4 17.5C4.53043 17.5 5.03914 17.7107 5.41421 18.0858C5.78929 18.4609 6 18.9696 6 19.5C6 20.0304 5.78929 20.5391 5.41421 20.9142C5.03914 21.2893 4.53043 21.5 4 21.5ZM16 21.5C15.4696 21.5 14.9609 21.2893 14.5858 20.9142C14.2107 20.5391 14 20.0304 14 19.5C14 18.9696 14.2107 18.4609 14.5858 18.0858C14.9609 17.7107 15.4696 17.5 16 17.5C16.5304 17.5 17.0391 17.7107 17.4142 18.0858C17.7893 18.4609 18 18.9696 18 19.5C18 20.0304 17.7893 20.5391 17.4142 20.9142C17.0391 21.2893 16.5304 21.5 16 21.5Z"
                     fill="#082032"
                   />
+                  <g>
+                    <circle
+                      xmlns="http://www.w3.org/2000/svg"
+                      cx="20"
+                      cy="5"
+                      r="5"
+                      fill="#398AB9"
+                    />
+                  </g>
                 </svg>
-              </a>
+              </Cart>
             </Link>
             <NavToggle
               onClick={() => setToggleMainMenu((prev) => !prev)}

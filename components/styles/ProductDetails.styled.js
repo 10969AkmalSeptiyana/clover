@@ -17,7 +17,10 @@ export const Wrapper = styled.div`
   }
 
   h2 {
-    font-size: 42px;
+    font-size: 32px;
+    @media screen and (min-width: 768px) {
+      font-size: 42px;
+    }
   }
 
   span {

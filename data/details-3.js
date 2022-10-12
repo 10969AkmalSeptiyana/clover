@@ -1,6 +1,7 @@
 export const details3 = {
   id: 3,
   price: 35,
+  quantity: 1,
   title: "Men’s Cotton T-Shirt",
   description:
     "<p>Super slim fit shirt made of high-stretch fabric. Italian collar and long sleeves with buttoned cuffs. Front button closure.</p>\n<p>Regular fit shirt with lapel collar and long sleeves with buttoned cuffs. Front button closure.</p>",

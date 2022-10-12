@@ -1,5 +1,8 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 
+import { useGlobalContext } from "../../lib/hooks/useGlobalContext";
+import useForm from "../../lib/hooks/useForm";
 import {
   StyledShippingDetails,
   Card,
@@ -12,10 +15,48 @@ import {
 import Button from "../ui/Button";
 
 export default function ShippingDetails({ meta }) {
+  const router = useRouter();
+  const { state, dispatch } = useGlobalContext();
+
+  const { state: payload, fnUpdateState } = useForm({
+    completeName: "",
+    emailAddress: "",
+    address: "",
+    phoneNumber: "",
+    courier: "",
+    payment: "",
+  });
+
+  const isSubmitDisabled =
+    Object.keys(payload).filter((key) => {
+      return payload[key] !== "";
+    }).length === Object.keys(payload).length;
+
+  async function fnSubmit(event) {
+    event.preventDefault();
+    try {
+      const res = await fetch(`/api/checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...payload,
+          cart: Object.keys(state.cart).map((key) => state.cart[key]),
+        }),
+      });
+
+      if (res) {
+        router.push("/success");
+        dispatch({ type: "RESET_CART" });
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   return (
     <StyledShippingDetails>
       <Card>
-        <form>
+        <form onSubmit={fnSubmit}>
           <Heading>
             <h3>Shipping Details</h3>
           </Heading>
@@ -26,6 +67,7 @@ export default function ShippingDetails({ meta }) {
               type="text"
               name="completeName"
               placeholder="Input your name"
+              onChange={fnUpdateState}
             />
           </InputGroup>
           <InputGroup>
@@ -34,6 +76,7 @@ export default function ShippingDetails({ meta }) {
               type="email"
               name="emailAddress"
               placeholder="Input your email address"
+              onChange={fnUpdateState}
             />
           </InputGroup>
           <InputGroup>
@@ -42,6 +85,7 @@ export default function ShippingDetails({ meta }) {
               type="text"
               name="address"
               placeholder="Input your address"
+              onChange={fnUpdateState}
             />
           </InputGroup>
           <InputGroup>
@@ -50,6 +94,7 @@ export default function ShippingDetails({ meta }) {
               type="tel"
               name="phoneNumber"
               placeholder="Input your phone number"
+              onChange={fnUpdateState}
             />
           </InputGroup>
 
@@ -61,11 +106,16 @@ export default function ShippingDetails({ meta }) {
                 return (
                   <div key={item.id}>
                     <label>
-                      <input type="radio" name="courier" />
+                      <input
+                        type="radio"
+                        name="courier"
+                        value={item.name}
+                        onChange={fnUpdateState}
+                      />
                       <div>
                         <Image
                           src={item.imageUrl}
-                          alt={item.title}
+                          alt={item.name}
                           width={item.width}
                           height={item.height}
                           objectFit="contain"
@@ -85,11 +135,16 @@ export default function ShippingDetails({ meta }) {
                 return (
                   <div key={item.id}>
                     <label>
-                      <input type="radio" name="payment" />
+                      <input
+                        type="radio"
+                        name="payment"
+                        value={item.name}
+                        onChange={fnUpdateState}
+                      />
                       <div>
                         <Image
                           src={item.imageUrl}
-                          alt={item.title}
+                          alt={item.name}
                           width={item.width}
                           height={item.height}
                           objectFit="contain"
@@ -104,11 +159,12 @@ export default function ShippingDetails({ meta }) {
 
           <ButtonWrapper>
             <Button
-              isSubmit
               padding="13px 0"
               width="100%"
               radius="57px"
               fontSize="18px"
+              type="submit"
+              disabled={!isSubmitDisabled}
             >
               Checkout Now
             </Button>

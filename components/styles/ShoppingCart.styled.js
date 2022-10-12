@@ -43,20 +43,15 @@ export const TableHeading = styled.div`
   width: ${({ width }) => width};
 
   &:not(:first-child) {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 28px;
   }
 
   &:nth-child(3) h4 {
-    padding: 0 34px;
+    padding-left: 24px;
   }
 
   &:nth-child(4) h4 {
-    padding: 0 20px;
-  }
-
-  &:last-child h4 {
-    margin: 0 auto;
+    padding-left: 5px;
   }
 
   h4 {
@@ -113,6 +108,7 @@ export const ProductItem = styled.div`
 
   h3 {
     font-size: 18px;
+    max-width: 180px;
   }
 
   span {
@@ -177,5 +173,10 @@ export const Delete = styled.div`
     color: #e0195d;
     padding: 4px 12px;
     background-color: transparent;
+    cursor: pointer;
   }
+`;
+
+export const Counter = styled.button`
+  cursor: pointer;
 `;

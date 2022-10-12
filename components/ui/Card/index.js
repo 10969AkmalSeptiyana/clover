@@ -6,7 +6,7 @@ import {
   ProductTitle,
   ProductPrice,
 } from "./Card.styled";
-import "../../../lib/hooks/format/currency";
+import "../../../lib/format/currency";
 
 export default function Card({ title, price, img, alt, children }) {
   return (
